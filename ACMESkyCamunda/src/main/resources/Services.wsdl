@@ -1,0 +1,92 @@
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="Services.wsdl"
+                  targetNamespace="Services.wsdl">
+
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="Services.wsdl">
+      <xs:element name="paymentNotificationRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sid" type="xs:string"/>
+            <xs:element name="paymentID" type="xs:integer"/>
+            <xs:element name="cost" type="xs:double"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="paymentNotificationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="sid" type="xs:string"/>
+            <xs:element name="error" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="offerLastMinuteRequest">
+          <xs:complexType>
+              <xs:sequence>
+                  <xs:element name="id" type="xs:integer"/>
+                  <xs:element name="depaCountry" type="xs:string"/>
+                  <xs:element name="depaCity" type="xs:string"/>
+                  <xs:element name="destCountry" type="xs:string"/>
+                  <xs:element name="destCity" type="xs:string"/>
+                  <xs:element name="price" type="xs:double"/>
+                  <xs:element name="num_seat" type="xs:int"/>
+                  <xs:element name="timestamp" type="xs:string"/>
+                  <xs:element name="company" type="xs:string"/>
+              </xs:sequence>
+          </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+
+  <wsdl:message name="paymentNotificationRequest">
+    <wsdl:part element="tns:paymentNotificationRequest" name="paymentNotificationRequest"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="paymentNotificationResponse">
+    <wsdl:part element="tns:paymentNotificationResponse" name="paymentNotificationResponse"></wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="offerLastMinuteRequest">
+    <wsdl:part element="tns:offerLastMinuteRequest" name="offerLastMinuteRequest"></wsdl:part>
+  </wsdl:message>
+
+
+  <wsdl:portType name="ACMESkyPort">
+    <wsdl:operation name="paymentNotificationRequest">
+      <wsdl:input message="tns:paymentNotificationRequest" name="paymentNotificationRequest"></wsdl:input>
+      <wsdl:output message="tns:paymentNotificationResponse" name="paymentNotificationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="offerLastMinuteRequest">
+      <wsdl:input message="tns:offerLastMinuteRequest" name="offerLastMinuteRequest"></wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+
+  <wsdl:binding name="ACMESkyPortBinding" type="tns:ACMESkyPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="paymentNotificationRequest">
+      <soap:operation soapAction="paymentNotificationRequest"  style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="offerLastMinuteRequest">
+      <soap:operation soapAction="offerLastMinuteRequest"  style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    
+  </wsdl:binding>
+
+  <wsdl:service name="ACMESkyPortService">
+    <wsdl:port binding="tns:ACMESkyPortBinding" name="ACMESkyPortServicePort">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+
+</wsdl:definitions>

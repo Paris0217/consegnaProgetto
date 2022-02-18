@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/sign-in/">
+  
+  
+  
+  
+  <style>
+  .accordion-button:not(.collapsed) {
+    color: #000;
+    background-color: #adb5bd;
+    box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%);
+}
+  
+  
+  .form-control:focus{
+	border-color: #ced4da !important;
+	}
+  
+  .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 110px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 200%;
+  max-width: 630px;
+  padding: 30px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 15px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+ 
+  
+    #btnCollapsedEdit.accordion-button::after {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3e%3c/svg%3e");
+	  color : black;
+    }
+    
+    
+  </style>
+  <title>Modifica interessi utente</title>
+</head>
+
+
+
+<body class="bg-light">
+ 	<nav class="navbar fixed-top navbar-dark bg-dark">
+    	<div class="container-fluid">
+    		<a class="navbar-brand" href="#">Acmesky</a>   
+    	</div>   
+  	</nav>
+
+
+	<main class="form-signin">
+
+  		<h1 class="h3 mb-3 fw-normal" align="center">Modifica interessi:</h1>
+  		<div class="container">	
+
+
+    <form method="POST" action="modificaInteressi" id="formToSend">
+      <input type="hidden" class="form-control" id="businessKey" name="businessKey" value="BUSINESSKEYVALUETOSET">
+      <input type="hidden" class="form-control" id="jsonInterests" name="jsonInterests" value="">
+
+      <div class="accordion" id="accordionPanelsStayOpenInterests">
+        <!-- -------- Inserire qui --------- -->
+      </div>
+      
+      <div class="d-grid gap-3 col-4 mx-auto mt-4">
+	  			<button class="btn btn-dark" id="btnSubminForm" onClick="sendForm()" >Salva modifiche</button>
+	  </div>
+      <!-- <div class="text-center">
+      <button class="btn btn-dark" id="btnSubminForm" onClick="sendForm()" >Salva modifiche</button>
+      </div> -->
+    </form>
+  </div>
+
+  <script type="text/javascript">
+
+  var interestToSend = [];
+  var indexCounter = INDEXCOUNTERTOSET;
+
+  var addBotton = "<div class=\"accordion-item mt-3 shadow-none\" id=\"accordionAddButton\">"+
+                  "  <h2 class=\"accordion-header\" id=\"panelsStayOpen-headingThree\" color=\"black\">"+
+                  "    <button class=\"accordion-button collapsed\" type=\"button\" onClick=\"addInterest()\" id=\"btnCollapsedEdit\" color=\"black\">"+
+                  "      Aggiungi nuovo interesse"+
+                  "    </button>"+
+                  "  </h2>"+
+                  "</div>";
+
+  $(function() {
+	  $("#accordionPanelsStayOpenInterests").append(addBotton);
+  });
+
+  function addInterest(){
+    $("#accordionAddButton").remove();
+    $("#accordionPanelsStayOpenInterests").append("<div class=\"accordion-item mt-3\" id=\"interest-"+indexCounter+"\">"
+							    		+ "          <h2 class=\"accordion-header\" id=\"panelsStayOpen-heading-"+indexCounter+"\">"
+							    		+ "            <button class=\"accordion-button\" id=\"btnAccordionHeader-"+indexCounter+"\" type=\"button\" data-bs-toggle=\"collapse\" data-bs-target=\"#panelsStayOpen-collapse-"+indexCounter+"\" aria-expanded=\"false\" aria-controls=\"panelsStayOpen-collapse-"+indexCounter+"\">"
+							    		+ "              -> "
+							    		+ "            </button>"
+							    		+ "          </h2>"
+							    		+ "          <div id=\"panelsStayOpen-collapse-"+indexCounter+"\" class=\"accordion-collapse collapse show\" aria-labelledby=\"panelsStayOpen-heading-"+indexCounter+"\">"
+							    		+ "			  <div class=\"row g-4\">"
+							    		+ "            <div class=\"accordion-body\">"
+							    		+ "              <input type=\"hidden\" class=\"form-control shadow-none\" id=\"id-"+indexCounter+"\" name=\"id-"+indexCounter+"\" value=\"\">"
+							    		+ "              <div class=\"row g-4\">"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"depaCountry-"+indexCounter+"\" class=\"form-label\">Stato di partenza*:</label>"
+							    		+ "                  <input type=\"text\" class=\"form-control shadow-none\" id=\"depaCountry-"+indexCounter+"\" name=\"depaCountry-"+indexCounter+"\" value=\"\" onchange='updateHeader(\""+indexCounter+"\")' required>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"depaCity-"+indexCounter+"\" class=\"form-label\">Città di partenza:</label>"
+							    		+ "                  <input type=\"text\" class=\"form-control shadow-none\" id=\"depaCity-"+indexCounter+"\" name=\"depaCity-"+indexCounter+"\" value=\"\" onchange='addElementToList(\""+indexCounter+"\")'>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"destCountry-"+indexCounter+"\" class=\"form-label\">Stato di destinazione*:</label>"
+							    		+ "                  <input type=\"text\" class=\"form-control shadow-none\" id=\"destCountry-"+indexCounter+"\" name=\"destCountry-"+indexCounter+"\" value=\"\" onchange='updateHeader(\""+indexCounter+"\")' required>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"destCity-"+indexCounter+"\" class=\"form-label\">Città di destinazione:</label>"
+							    		+ "                  <input type=\"text\" class=\"form-control shadow-none\" id=\"destCity-"+indexCounter+"\" name=\"destCity-"+indexCounter+"\" value=\"\" onchange='addElementToList(\""+indexCounter+"\")'>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"periodStart-"+indexCounter+"\" class=\"form-label\">Periodo inzio*:</label>"
+							    		+ "                  <input type=\"date\" class=\"form-control shadow-none\" id=\"periodStart-"+indexCounter+"\" name=\"periodStart-"+indexCounter+"\" value=\"\" onchange='addElementToList(\""+indexCounter+"\")' required>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"periodEnd-"+indexCounter+"\" class=\"form-label\">Periodo fine:</label>"
+							    		+ "                  <input type=\"date\" class=\"form-control shadow-none\" id=\"periodEnd-"+indexCounter+"\" name=\"periodEnd-"+indexCounter+"\" value=\"\" onchange='addElementToList(\""+indexCounter+"\")' required>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"price-"+indexCounter+"\" class=\"form-label\">Prezzo*:</label>"
+							    		+ "                  <input type=\"number\" class=\"form-control shadow-none\" id=\"price-"+indexCounter+"\" name=\"price-"+indexCounter+"\" value=\"\" min=\"0\" onchange='addElementToList(\""+indexCounter+"\")' required>"
+							    		+ "                </div>"
+							    		+ "                <div class=\"col-6\">"
+							    		+ "                  <label for=\"numSeat-"+indexCounter+"\" class=\"form-label\">Numero biglietti*:</label>"
+							    		+ "                  <input type=\"number\" class=\"form-control shadow-none\" id=\"numSeat-"+indexCounter+"\" name=\"numSeat-"+indexCounter+"\" value=\"\" min=\"1\" onchange='addElementToList(\""+indexCounter+"\")' required>"
+							    		+ "                </div>"
+							    		+ "              </div>"
+							    		+ "              <div class=\"text-center\">"
+							    		+ "                <a class=\"btn btn-danger mt-3\" id=\"btnDelete-"+indexCounter+"\" onClick='deleteInterest(\""+indexCounter+"\")' >Elimina</a>"
+							    		+ "              </div>"
+							    		+ "            </div>"
+							    		+ "          </div>"
+							    		+ "        </div>");
+
+    addElementToList(indexCounter, "INSERT");
+    $("#accordionPanelsStayOpenInterests").append(addBotton);
+    indexCounter+=1;
+
+  }
+
+  function deleteInterest(i) {
+    $("#interest-"+i).hide();
+    addElementToList(i, "DELETE");
+  }
+
+  function addElementToList(i, typeOp="UPDATE") {
+    if(typeOp=="UPDATE" || typeOp=="INSERT"){
+      const found = interestToSend.find(element => element.id == i);
+      if (!found) {
+        interestToSend.push({"op": typeOp, "id": i});
+      }
+    }else if(typeOp=="DELETE") {
+      interestToSend = interestToSend.filter(element => element.id != i);
+      interestToSend.push({"op": typeOp, "id": i});
+    }
+  }
+
+  function updateHeader(i) {
+    const depaCountry = $("#depaCountry-"+i).val();
+    const destCountry = $("#destCountry-"+i).val();
+    $("button#btnAccordionHeader-"+i).text(depaCountry + " -> " + destCountry);
+    addElementToList(i, "UPDATE");
+  }
+
+  function sendForm(){
+    var jsonToSend = {"interests":[]};
+    interestToSend.forEach((element) => {
+      const i = element.id;
+      var operation = {
+        "operation": element.op,
+        "interest": {
+          "id": $("input#id-"+i).val(),
+          "userId": "USERIDTOSET",
+          "depaCountry": $("input#depaCountry-"+i).val(),
+          "depaCity": $("input#depaCity-"+i).val(),
+          "destCountry": $("input#destCountry-"+i).val(),
+          "destCity": $("input#destCity-"+i).val(),
+          "periodStart": $("input#periodStart-"+i).val(),
+          "periodEnd": $("input#periodEnd-"+i).val(),
+          "price": $("input#price-"+i).val(),
+          "numSeat": $("input#numSeat-"+i).val()
+        }
+      };
+      jsonToSend.interests.push(operation);
+    });
+
+    $("input#jsonInterests").val(JSON.stringify(jsonToSend));
+
+    $("form#formToSend").remove("accordionPanelsStayOpenInterests").submit();
+  }
+  </script>
+ </main>
+</body>
+</html>

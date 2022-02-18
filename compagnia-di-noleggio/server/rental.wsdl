@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="RentalService.wsdl" xmlns:xsd1="RentalService.xsd" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="RentalService.wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <xs:schema targetNamespace="RentalService.xsd" xmlns:sch="RentalService.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema"><xs:complexType name="ID"><xs:sequence><xs:element maxOccurs="1" minOccurs="1" name="sid" type="xs:string"/></xs:sequence></xs:complexType><xs:element name="cancelReservation"><xs:complexType><xs:sequence><xs:element maxOccurs="1" minOccurs="1" name="id" type="sch:ID"/></xs:sequence></xs:complexType></xs:element><xs:element name="cancelReservationResponse"><xs:complexType><xs:sequence><xs:element maxOccurs="1" minOccurs="1" name="canceled" type="xs:boolean"/></xs:sequence></xs:complexType></xs:element><xs:element name="reserve"><xs:complexType><xs:sequence><xs:element maxOccurs="1" minOccurs="1" name="address" type="xs:string"/><xs:element maxOccurs="1" minOccurs="1" name="name" type="xs:string"/><xs:element maxOccurs="1" minOccurs="1" name="timestamp" type="xs:long"/></xs:sequence></xs:complexType></xs:element><xs:element name="reserveResponse"><xs:complexType><xs:sequence><xs:element maxOccurs="1" minOccurs="1" name="reserved" type="xs:boolean"/><xs:element maxOccurs="1" minOccurs="1" name="id" type="sch:ID"/></xs:sequence></xs:complexType></xs:element></xs:schema>
+  </wsdl:types>
+  <wsdl:message name="CancelReservationRequest">
+    <wsdl:part name="body" element="xsd1:cancelReservation">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CancelReservationResponse">
+    <wsdl:part name="body" element="xsd1:cancelReservationResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReservationResponse">
+    <wsdl:part name="body" element="xsd1:reserveResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ReservationRequest">
+    <wsdl:part name="body" element="xsd1:reserve">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RentalPort">
+    <wsdl:operation name="cancelReservation">
+      <wsdl:input message="tns:CancelReservationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:CancelReservationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reserve">
+      <wsdl:input message="tns:ReservationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:ReservationResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RentalPortSOAPBinding" type="tns:RentalPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="cancelReservation">
+      <soap:operation soapAction="cancelReservation" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="reserve">
+      <soap:operation soapAction="reserve" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RentalPortService">
+    <wsdl:port name="RentalPortServicePort" binding="tns:RentalPortSOAPBinding">
+      <soap:address location="http://localhost:5004"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

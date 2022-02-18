@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <link rel="canonical" href="https://v5.getbootstrap.com/docs/5.0/examples/sign-in/">
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  
+  <title>Registrazione</title>
+ 
+ <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 15px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="name"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="surname"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.form-signin input[type="date"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="nationality"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="cardNumber"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="phoneNumber"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin button[type="submit"] {
+  margin-bottom: 10px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+    </style>
+  </head>
+
+<body class="bg-light">
+
+
+ <nav class="navbar fixed-top navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Acmesky</a>      
+  </nav>
+                        
+ 
+<main class="form-signin">
+
+
+  	
+  	<h1 class="h3 mb-3 fw-normal" align="center">Registrazione</h1>
+
+
+    <form  method="POST" action="registrazione" id="formID">
+	<div class="container">
+      <div class="form-floating">
+        <input type="name" class="form-control" id="name" name="name"  placeholder="Nome" value="" required>
+		<label for="name">Nome*</label>
+      </div>
+      <div class="form-floating">
+        <input type="surname" class="form-control" id="surname" name="surname" placeholder="Cognome" value="" required>
+		<label for="surname">Cognome*</label>
+      </div>
+      <div class="form-floating">
+        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="" required>
+		<label for="email">Email*</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Password" value="" required>
+		<label for="password">Password*</label>
+      </div>
+      <div class="form-floating">
+        <input type="date" class="form-control" id="birthday" name="birthday" placeholder="Data di nascita" value="" required>
+		<label for="birthday">Data di nascita*</label>
+      </div>
+      <div class="form-floating">
+        <input type="nationality" class="form-control" id="nationality" name="nationality" placeholder="Codice ISO nazionalità*" value="" required>
+		<label for="nationality">Codice ISO nazionalità*</label>
+      </div>
+      <div class="form-floating"> 
+        <input type="cardNumber" class="form-control" id="cardNumber" name="cardNumber" placeholder="Numero carta" value="">
+		<label for="cardNumber">Numero carta</label>
+      </div>
+	  <div class="form-floating"> 
+        <input type="phoneNumber" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="Cellulare" value="" required>
+		<label for="phoneNumber">Cellulare*</label>
+      </div>
+     
+        <div class="text-center">
+          <button type="submit" class="btn btn-dark">Crea profilo</button>
+        </div>
+	</div>
+    </form>
+
+
+</main>
+
+
+  <script type="text/javascript">
+
+    $("#formID").submit(function (e) {
+      if($("#nationality").val().length != 3){
+        e.preventDefault();
+      }
+      if($("#cardNumber").val().length != 16 && $("#cardNumber").val().length != 0){
+        e.preventDefault();
+      }
+    });
+    
+  </script>
+
+</body>
+</html>
